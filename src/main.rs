@@ -17,15 +17,15 @@ struct Token {
 static LOGS: LazyLock<Vec<Rule>> = LazyLock::new(|| {
     vec![
         Rule {
-            regex: Regex::new(r"\bERROR\b").unwrap(),
+            regex: Regex::new(r"(?i)\bERROR\b").unwrap(),
             color: AnsiColors::Red,
         },
         Rule {
-            regex: Regex::new(r"\bINFO\b").unwrap(),
+            regex: Regex::new(r"(?i)\bINFO\b").unwrap(),
             color: AnsiColors::White,
         },
         Rule {
-            regex: Regex::new(r"\bWARNING\b").unwrap(),
+            regex: Regex::new(r"(?i)\bWARNING\b").unwrap(),
             color: AnsiColors::Yellow,
         },
     ]
