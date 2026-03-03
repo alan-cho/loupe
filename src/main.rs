@@ -42,7 +42,7 @@ fn match_rules(rules: &Vec<Rule>, line: String) {
     let mut tokens: Vec<Token> = Vec::new();
     let colorized = line;
     for rule in rules.iter() {
-        if let Some(m) = rule.regex.find(&colorized) {
+        for m in rule.regex.find_iter(&colorized) {
             tokens.push(Token {
                 start_position: m.start(),
                 end_position: m.end(),
