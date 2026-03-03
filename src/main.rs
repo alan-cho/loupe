@@ -1,35 +1,8 @@
-use owo_colors::{AnsiColors, OwoColorize};
-use regex::Regex;
+mod rules;
+
+use crate::rules::{LOGS, Rule, Token};
+use owo_colors::OwoColorize;
 use std::io::{self, BufRead};
-use std::sync::LazyLock;
-
-struct Rule {
-    regex: Regex,
-    color: AnsiColors,
-}
-
-struct Token {
-    start_position: usize,
-    end_position: usize,
-    color: AnsiColors,
-}
-
-static LOGS: LazyLock<Vec<Rule>> = LazyLock::new(|| {
-    vec![
-        Rule {
-            regex: Regex::new(r"(?i)\bERROR\b").unwrap(),
-            color: AnsiColors::Red,
-        },
-        Rule {
-            regex: Regex::new(r"(?i)\bINFO\b").unwrap(),
-            color: AnsiColors::White,
-        },
-        Rule {
-            regex: Regex::new(r"(?i)\bWARNING\b").unwrap(),
-            color: AnsiColors::Yellow,
-        },
-    ]
-});
 
 fn main() {
     for line in io::stdin().lock().lines() {
